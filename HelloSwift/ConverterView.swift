@@ -46,10 +46,10 @@ protocol ConverterViewDelegate:class {
         
         
         @IBAction func forwardPressed() {
-        delegate?.converterView(view: self, convertForward: fromValue)
+        delegate?.converterView(view: self, convertForward: toValue)
         }
         @IBAction func backwardPressed() {
-        delegate?.converterView(view: self, convertBackward: toValue)
+        delegate?.converterView(view: self, convertBackward: fromValue)
         }
 // закругление углов у view
         required init?(coder aDecoder:NSCoder) {
