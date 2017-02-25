@@ -40,8 +40,16 @@ protocol ConverterViewDelegate:class {
             }
         }
 // private - чтобы не было видно другим эти строки ввода
-    @IBOutlet private weak var toTextField:UITextField?
-    @IBOutlet private weak var fromTextField:UITextField?
+        @IBOutlet private weak var toTextField:UITextField? {
+            didSet {
+                toTextField?.delegate = self
+            }
+        }
+        @IBOutlet private weak var fromTextField:UITextField? {
+            didSet {
+                fromTextField?.delegate = self
+            }
+        }
         
         
         
@@ -60,7 +68,15 @@ protocol ConverterViewDelegate:class {
         private func setup() {
             self.layer.cornerRadius = 5
             self.clipsToBounds = true
+           
             
         }
-        
+}
+
+extension ConverterView : UITextFieldDelegate {
+    //в момент когда
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        // сотрем все лишнее
+        textField.text = textField.text?.filterForNumberConvertion
+    }
 }
